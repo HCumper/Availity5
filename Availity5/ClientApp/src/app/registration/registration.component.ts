@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Registration } from './registration';
 
 @Component({
@@ -16,11 +16,20 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
-      FirstName: '',
-      LastName: '',
-      Email: ''
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      TelephoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
 
     })
+  }
+
+  setEmailOrOPhone(): void {
+    const phoneControl = this.registrationForm.get('TelephoneNumber');
+    const emailControl = this.registrationForm.get('Email');
+
+    phoneControl.updateValueAndValidity();
+    emailControl.updateValueAndValidity();
   }
 
   save() {

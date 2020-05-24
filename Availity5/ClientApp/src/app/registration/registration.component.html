@@ -10,27 +10,45 @@
 
       <mat-form-field>
         <mat-label for="FirstNameId">First Name</mat-label>
-        <input matInput id="FirstNameId" type="text" required formControlName="FirstName"
-               [ngClass]="{'is-invalid': (registrationForm.get('FirstName').touched || registrationForm.get('FirstName').dirty) && !registrationForm.get('FirstName').valid }"/>
-        <mat-error *ngIf="registrationForm.get('FirstName').hasError('required')"> 
+        <input matInput id="FirstNameId" type="text" formControlName="FirstName"
+               [ngClass]="{'is-invalid': (registrationForm.get('FirstName').touched || registrationForm.get('FirstName').dirty) && !registrationForm.get('FirstName').valid }" />
+        <mat-error *ngIf="registrationForm.get('FirstName').hasError('required')">
           Please enter the first name
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label for="LastNameId">Last Name</mat-label>
-        <input matInput id="LastNameId" type="text" placeholder="Last Name (required)" required formControlName="LastName" />
-        <!--<mat-error *ngIf="LastNameVar.hasError('required')">
-    Please enter the Last name
-  </mat-error>-->
+        <input matInput id="LastNameId" type="text" formControlName="LastName"
+               [ngClass]="{'is-invalid': (registrationForm.get('LastName').touched || registrationForm.get('LastName').dirty) && !registrationForm.get('LastName').valid }" />
+        <mat-error *ngIf="registrationForm.get('LastName').hasError('required')">
+          Please enter the Last name
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label for="EmailId">Email</mat-label>
-        <input matInput id="EmailId" type="email" placeholder="Email (required)" required formControlName="Email" /> 
-        <!--<mat-error *ngIf="EmailVar.hasError('required')">
-          Please enter the Email address
-        </mat-error>-->
+        <input matInput id="EmailId" type="email" formControlName="Email"
+               [ngClass]="{'is-invalid': (registrationForm.get('Email').touched || registrationForm.get('Email').dirty) && !registrationForm.get('Email').valid }" />
+        <mat-error *ngIf="registrationForm.get('Email').hasError('required')">
+          Please enter the Email
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('Email').hasError('email')">
+          Invalid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label for="TelephoneId">Pnone Number</mat-label>
+        <input matInput id="PhonrId" type="tel" formControlName="TelephoneNumber"
+               [ngClass]="{'is-invalid': (registrationForm.get('TelephoneNumber').touched || registrationForm.get('TelephoneNumber').dirty) &&
+               !registrationForm.get('TelephoneNumber').valid }" />
+        <mat-error *ngIf="registrationForm.get('TelephoneNumber').hasError('required')">
+          Please enter the TelephoneNumber
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('TelephoneNumber').hasError('pattern')">
+          Phone number must be 10 digits
+        </mat-error>
       </mat-form-field>
 
     </form>
@@ -40,6 +58,7 @@
     <button mat-raised-button color="accent" type="submit" [title]="registrationForm.valid ? 'Save new registrant' : ''" [disabled]="!registrationForm.valid">Submit</button>
   </mat-card-actions>
 </mat-card>
+
 <br>Dirty: {{ registrationForm.dirty }}
 <br>Touched: {{ registrationForm.touched }}
 <br>Valid: {{ registrationForm.valid }}
