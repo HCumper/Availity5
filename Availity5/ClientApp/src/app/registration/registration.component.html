@@ -5,35 +5,50 @@
   <mat-card-content>
     <form novalidate
           (ngSubmit)="save(registrationForm)"
-          #registrationForm="ngForm">
+          #registrationForm="ngForm"
+          class="registration-container">
+
       <mat-form-field>
         <mat-label for="FirstNameId">First Name</mat-label>
-        <input class=""
-               id="FirstNameId"
-               type="text"
-               placeholder="First Name (required)"
-               required
-               minlength="3"
+        <input matInput id="FirstNameId" type="text" placeholder="First Name (required)" required name="FirstName" #FirstNameVar="ngModel"
                [(ngModel)]=registration.FirstName
-               name="FirstName"
-               #FirstNameVar="ngModel"
                [ngClass]="{'is-invalid': (FirstNameVar.touched || FirstNameVar.dirty) && !FirstNameVar.valid }" />
         <mat-error *ngIf="FirstNameVar.hasError('required')">
           Please enter the first name
         </mat-error>
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label for="LastNameId">Last Name</mat-label>
+        <input matInput id="LastNameId" type="text" placeholder="Last Name (required)" maxlength="50" required name="LastName" #LastNameVar="ngModel"
+               [(ngModel)]=registration.LastName
+               [ngClass]="{'is-invalid': (LastNameVar.touched || LastNameVar.dirty) && !LastNameVar.valid }" />
+        <mat-error *ngIf="LastNameVar.hasError('required')">
+          Please enter the Last name
+        </mat-error>
+        <mat-error *ngIf="LastNameVar.errors?.maxlength">
+          The last name must be less than 50 characters.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label for="EmailId">Email</mat-label>
+        <input matInput id="Email" type="email" required name="Email" #EmailVar="ngModel"
+               [(ngModel)]=registration.Email
+               [ngClass]="{'is-invalid': (EmailVar.touched || EmailVar.dirty) && !EmailVar.valid }" />
+        <mat-error *ngIf="EmailVar.hasError('required')">
+          Please enter the Email address
+        </mat-error>
+      </mat-form-field>
+
     </form>
+
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="accent">Accent</button>
-
-
-
-
   </mat-card-actions>
 </mat-card>
-  <br>Dirty: {{ registrationForm.dirty }}
-  <br>Touched: {{ registrationForm.touched }}
-  <br>Valid: {{ registrationForm.valid }}
-  <br>Value: {{ registrationForm.value | json }}
+<br>Dirty: {{ registrationForm.dirty }}
+<br>Touched: {{ registrationForm.touched }}
+<br>Valid: {{ registrationForm.valid }}
+<br>Value: {{ registrationForm.value | json }}

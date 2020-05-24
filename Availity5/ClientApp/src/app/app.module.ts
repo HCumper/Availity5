@@ -8,7 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegistrationComponent } from './registration/registration.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatInputModule } from '@angular/Material/input'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { MatCardModule } from '@angular/material/card'
     MatFormFieldModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
