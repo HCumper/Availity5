@@ -4,14 +4,18 @@ using System.Text;
 
 namespace Availity5.DataModels
 {
-        public class Registration
-        {
-            public DateTime Date { get; set; }
-
-            public int TemperatureC { get; set; }
-
-            public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-            public string Summary { get; set; }
-        }
+    public class Registration
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
+        public string NPINumber { get; set; }
+        public string TelephoneNumber { get; set; }
+        public string Email { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string StateCode { get; set; }
+        public int Zip { get; set; }
     }
+}
