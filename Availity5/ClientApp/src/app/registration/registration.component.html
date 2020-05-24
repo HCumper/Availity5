@@ -8,7 +8,6 @@
           #registrationForm="ngForm">
       <mat-form-field>
         <mat-label for="FirstNameId">First Name</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi">
         <input class=""
                id="FirstNameId"
                type="text"
@@ -27,7 +26,11 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>Submit</button>
+    <button mat-raised-button color="accent">Accent</button>
+
+
+
+
   </mat-card-actions>
 </mat-card>
   <br>Dirty: {{ registrationForm.dirty }}

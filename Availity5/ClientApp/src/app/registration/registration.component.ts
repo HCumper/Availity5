@@ -7,6 +7,7 @@ import { Registration } from './registration';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
+
 export class RegistrationComponent implements OnInit {
   registration = new Registration();
 
