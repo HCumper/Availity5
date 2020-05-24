@@ -1,16 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { RegistrationComponent } from './registration/registration.component';
-import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/Material/input'
+
+import { AppComponent } from './app.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +19,10 @@ import { MatInputModule } from '@angular/Material/input'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     MatButtonModule,
-    MatSliderModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    FormsModule,
+   ReactiveFormsModule,
     MatCardModule,
     FlexLayoutModule,
     MatInputModule

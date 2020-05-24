@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Registration } from './registration';
 
 @Component({
@@ -9,16 +9,23 @@ import { Registration } from './registration';
 })
 
 export class RegistrationComponent implements OnInit {
+  registrationForm: FormGroup;
   registration = new Registration();
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.registrationForm = this.fb.group({
+      FirstName: '',
+      LastName: '',
+      Email: ''
+
+    })
   }
 
-  save(registrationForm: NgForm) {
-    console.log(registrationForm.form);
-    console.log('Saved: ' + JSON.stringify(registrationForm.value));
+  save() {
+    console.log(this.registrationForm);
+    console.log('Saved: ' + JSON.stringify(this.registrationForm.value));
   }
 
 }
