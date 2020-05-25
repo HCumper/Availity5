@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm, FormControl, FormGroupDirective } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Registration } from './registration';
+import { StatesList } from './States';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-registration',
@@ -13,29 +23,26 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   registration = new Registration();
   emailMessage: string;
-
-  private ValidationMessages = {
-    required: 'Please enter the email address.',
-    email: 'Invalid email address'
-}
+  statesList = new StatesList();
+  state = '';
+  selectFormControl = new FormControl('', Validators.required);
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
+      NPINumber: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       TelephoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
-
+      AddressLine1: ['', Validators.required],
+      AddressLine2: '',
+      City: ['', Validators.required],
+      StateCode: ['', Validators.required],
+      Zip: ['', [Validators.required, Validators.pattern("[0-9]{10}")]]
     })
 
-    const emailControl = this.registrationForm.controls.Email;
-    emailControl.valueChanges.pipe(
-      debounceTime(1000)
-    ).subscribe(
-      value => this.setMessage(emailControl)
-    );
   }
 
   setEmailOrPhone(): void {
@@ -51,11 +58,5 @@ export class RegistrationComponent implements OnInit {
     console.log('Saved: ' + JSON.stringify(this.registrationForm.value));
   }
 
-  setMessage(c: AbstractControl): void {
-    this.emailMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.emailMessage = Object.keys(c.errors).map(
-        key => this.ValidationMessages[key]).join(' ');
-    }
-  }
+  matcher = new MyErrorStateMatcher();
 }

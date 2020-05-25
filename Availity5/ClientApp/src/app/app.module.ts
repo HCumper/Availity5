@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/Material/input'
+import { MatSelectModule } from '@angular/Material/select'
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -25,7 +26,8 @@ import { RegistrationComponent } from './registration/registration.component';
    ReactiveFormsModule,
     MatCardModule,
     FlexLayoutModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
