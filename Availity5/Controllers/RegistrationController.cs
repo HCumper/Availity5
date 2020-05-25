@@ -25,14 +25,11 @@ namespace Availity5.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<Registration> Get()
+        [HttpPut]
+        public StatusCodeResult AddRegistration(Registration registration)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Registration
-            {
-            })
-            .ToArray();
+            // do somthing useful with it
+            return new OkResult();
         }
 
     }

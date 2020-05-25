@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Registration = void 0;
 var Registration = /** @class */ (function () {
-    function Registration(FirstName, LastName, NPINumber, TelephoneNumber, Email, AddressLine1, AddressLine2, City, StateCode, zip) {
+    function Registration(FirstName, LastName, NPINumber, TelephoneNumber, Email, AddressLine1, AddressLine2, City, State, zip) {
         if (FirstName === void 0) { FirstName = ''; }
         if (LastName === void 0) { LastName = ''; }
         if (NPINumber === void 0) { NPINumber = ''; }
@@ -10,7 +10,7 @@ var Registration = /** @class */ (function () {
         if (Email === void 0) { Email = ''; }
         if (AddressLine1 === void 0) { AddressLine1 = ''; }
         if (City === void 0) { City = ''; }
-        if (StateCode === void 0) { StateCode = ''; }
+        if (State === void 0) { State = ''; }
         if (zip === void 0) { zip = ''; }
         this.FirstName = FirstName;
         this.LastName = LastName;
@@ -20,7 +20,7 @@ var Registration = /** @class */ (function () {
         this.AddressLine1 = AddressLine1;
         this.AddressLine2 = AddressLine2;
         this.City = City;
-        this.StateCode = StateCode;
+        this.State = State;
         this.zip = zip;
     }
     return Registration;

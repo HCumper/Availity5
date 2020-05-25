@@ -9,6 +9,6 @@ export class Registration {
     public AddressLine1: string = '',
     public AddressLine2?: string,
     public City: string = '',
-    public StateCode: '' = '',
+    public State: string = '',
     public zip: string = '') { }
 }

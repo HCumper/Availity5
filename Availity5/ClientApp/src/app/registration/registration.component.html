@@ -1,16 +1,16 @@
-<mat-card class="registrationCard">
-  <mat-card-header>
-    <mat-card-title>New Provider Registration</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form novalidate
-          (ngSubmit)="save()"
-          [formGroup]="registrationForm"
-          class="registration-container">
+<form novalidate
+      (ngSubmit)="save()"
+      [formGroup]="registrationForm">
+
+  <mat-card class="registrationCard">
+    <mat-card-header>
+      <mat-card-title>New Provider Registration</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="registration-container">
 
       <mat-form-field>
         <mat-label for="NPINumberId">NPI Number</mat-label>
-        <input matInput id="NPINumberId" type="text" formControlName="NPINumber" placeholder="e.g. 1234567890" [errorStateMatcher]="matcher" required />
+        <input matInput id="NPINumberId" type="text" formControlName="NPINumber" placeholder="e.g. 1234567890" [errorStateMatcher]="matcher" required maxlength="10" />
         <mat-error *ngIf="registrationForm.controls.NPINumber.hasError('required')">
           Please enter NPI number
         </mat-error>
@@ -29,7 +29,7 @@
 
       <mat-form-field>
         <mat-label for="LastNameId">LastName</mat-label>
-        <input matInput id="LastNameId" type="text" formControlName="LastName" placeholder="e.g Doe" [errorStateMatcher]="matcher"  required/>
+        <input matInput id="LastNameId" type="text" formControlName="LastName" placeholder="e.g Doe" [errorStateMatcher]="matcher" required />
         <mat-error *ngIf="registrationForm.controls.LastName.hasError('required')">
           Please enter last name
         </mat-error>
@@ -37,7 +37,7 @@
 
       <mat-form-field>
         <mat-label for="EmailId">Email</mat-label>
-        <input matInput id="EmailId" type="email" formControlName="Email" placeholder="e.g JDoe@somewherecom" [errorStateMatcher]="matcher"  required/>
+        <input matInput id="EmailId" type="email" formControlName="Email" placeholder="e.g JDoe@somewherecom" [errorStateMatcher]="matcher" required />
         <mat-error *ngIf="registrationForm.controls.Email.hasError('required')">
           Please enter email address
         </mat-error>
@@ -48,7 +48,7 @@
 
       <mat-form-field>
         <mat-label for="TelephoneId">Pnone Number</mat-label>
-        <input matInput id="TelephoneId" type="tel" formControlName="TelephoneNumber" placeholder="e.g.903892322" [errorStateMatcher]="matcher"  required/>
+        <input matInput id="TelephoneId" type="tel" formControlName="TelephoneNumber" placeholder="e.g.903892322" [errorStateMatcher]="matcher" required maxlength="10" />
         <mat-error *ngIf="registrationForm.get('TelephoneNumber').hasError('required')">
           Please enter the TelephoneNumber
         </mat-error>
@@ -67,44 +67,41 @@
 
       <mat-form-field>
         <mat-label for="AddressLine2Id">Address Line 2</mat-label>
-        <input matInput id="AddressLine2Id" type="text" formControlName="AddressLine2" placeholder="e.g. Oval office " [errorStateMatcher]="matcher"  required/>
+        <input matInput id="AddressLine2Id" type="text" formControlName="AddressLine2" placeholder="e.g. Oval office " [errorStateMatcher]="matcher" />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label for="CityId">City</mat-label>
-        <input matInput id="CityId" type="text" formControlName="City" placeholder="e.g Washington D.C." [errorStateMatcher]="matcher"  required/>
+        <input matInput id="CityId" type="text" formControlName="City" placeholder="e.g Washington D.C." [errorStateMatcher]="matcher" required />
         <mat-error *ngIf="registrationForm.controls.City.hasError('required')">
           Please enter the city
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label for="StateId">State</mat-label>
-        <mat-select if="StateId" required formControlName="State" placeholder="e.g. Florida" [formControl]="selectFormControl">
-          <mat-option *ngFor="let state of statesList.States" [value]="state.value">
-            {{ state.viewValue }}
-          </mat-option>
+        <mat-label for="StatesId">State</mat-label>
+        <mat-select id="StatesId" [formControlName]="selected" [(value)]="selectedState">
+          <mat-option *ngFor="let state of statesList.States" [value]="state">{{ state.viewValue }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="selectFormControl.hasError('required')">
-    Please select a state
-  </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label for="ZipId">Zip</mat-label>
-        <input matInput id="ZipId" type="text" formControlName="Zip" placeholder="e.g. 20500" [errorStateMatcher]="matcher" required/>
+        <input matInput id="ZipId" type="text" formControlName="Zip" placeholder="e.g. 20500" [errorStateMatcher]="matcher" required maxlength="5" />
         <mat-error *ngIf="registrationForm.controls.Zip.hasError('required')">
           Please enter the zip code
         </mat-error>
+        <mat-error *ngIf="registrationForm.controls.Zip.hasError('pattern')">
+          Zip must be 5 digits
+        </mat-error>
       </mat-form-field>
 
-    </form>
-
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="accent" type="submit" [title]="registrationForm.valid ? 'Save new registrant' : ''" [disabled]="!registrationForm.valid">Submit</button>
-  </mat-card-actions>
-</mat-card>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" type="submit" [title]="registrationForm.valid ? 'Save new registrant' : ''">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
 
 <br>Dirty: {{ registrationForm.dirty }}
 <br>Touched: {{ registrationForm.touched }}

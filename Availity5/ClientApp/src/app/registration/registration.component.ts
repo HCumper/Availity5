@@ -4,6 +4,7 @@ import { debounceTime } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Registration } from './registration';
 import { StatesList } from './States';
+import { DataService } from '../data.service'
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -22,12 +23,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   registration = new Registration();
-  emailMessage: string;
   statesList = new StatesList();
-  state = '';
   selectFormControl = new FormControl('', Validators.required);
+  errorMessage: string;
+  selectedState = { value: 'CT', viewValue: 'Connecticut' };
+  selected: string;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private registrationService: DataService) { } 
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -39,8 +41,8 @@ export class RegistrationComponent implements OnInit {
       AddressLine1: ['', Validators.required],
       AddressLine2: '',
       City: ['', Validators.required],
-      StateCode: ['', Validators.required],
-      Zip: ['', [Validators.required, Validators.pattern("[0-9]{10}")]]
+      selectedValue: ['', Validators.required],
+      Zip: ['', [Validators.required, Validators.pattern("[0-9]{5}")]],
     })
 
   }
@@ -53,10 +55,22 @@ export class RegistrationComponent implements OnInit {
     emailControl.updateValueAndValidity();
   }
 
-  save() {
-    console.log(this.registrationForm);
-    console.log('Saved: ' + JSON.stringify(this.registrationForm.value));
+  save(): void {
+    if (this.registrationForm.valid) {
+      this.registrationService.PutRegistration(this.registration)
+        .subscribe; ({
+          next: () => this.NotifySaved(),
+          error: err => this.errorMessage = err
+        })
+    } else {
+      this.errorMessage = 'Please correct errors';
+    }
   }
 
   matcher = new MyErrorStateMatcher();
+
+  NotifySaved(): void {
+    this.registrationForm.reset();
+    // display message
+  }
 }
