@@ -4,7 +4,7 @@ import { debounceTime } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Registration } from './registration';
 import { StatesList } from './States';
-import { DataService } from '../data.service'
+import { DataService } from '../data.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -27,9 +27,8 @@ export class RegistrationComponent implements OnInit {
   selectFormControl = new FormControl('', Validators.required);
   errorMessage: string;
   selectedState = { value: 'CT', viewValue: 'Connecticut' };
-  selected: string;
 
-  constructor(private fb: FormBuilder, private registrationService: DataService) { } 
+  constructor(private fb: FormBuilder, private registrationService: DataService) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -41,7 +40,7 @@ export class RegistrationComponent implements OnInit {
       AddressLine1: ['', Validators.required],
       AddressLine2: '',
       City: ['', Validators.required],
-      selectedValue: ['', Validators.required],
+      StateSelect: ['', Validators.required],
       Zip: ['', [Validators.required, Validators.pattern("[0-9]{5}")]],
     })
 
@@ -56,8 +55,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   save(): void {
+    const param = { ...this.registration, ...this.registrationForm.value }
     if (this.registrationForm.valid) {
-      this.registrationService.PutRegistration(this.registration)
+      this.registrationService.PutRegistration(param)
         .subscribe; ({
           next: () => this.NotifySaved(),
           error: err => this.errorMessage = err
@@ -72,5 +72,21 @@ export class RegistrationComponent implements OnInit {
   NotifySaved(): void {
     this.registrationForm.reset();
     // display message
+  }
+
+  //dev only
+  populateTestData(): void {
+    this.registrationForm.patchValue({
+      NPINumber: '1234567890',
+      FirstName: 'Donald',
+      LastName: 'Bradman',
+      Email: 'thedon@australia.com',
+      TelephoneNumber: '8934217654',
+      AddressLine1: '9 Bessborough Mansions',
+      AddressLine2: '122 Regency Street',
+      City: 'Qikiqtarjuaq',
+      StateSelect: 'FL',
+      Zip: '32216'
+    });
   }
 }

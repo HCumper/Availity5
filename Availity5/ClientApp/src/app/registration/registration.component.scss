@@ -1,8 +1,15 @@
 
-.registration-container {
+.registration-vertical {
   display: flex;
   flex-direction: column;
-  width: 30%
+  width: 30%;
+  font-size: larger;
+}
+
+.registration-horizontal {
+display: flex;
+flex-direction: row;
+width: 30%
 }
 
 .registration-full-width {

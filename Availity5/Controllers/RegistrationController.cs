@@ -26,7 +26,7 @@ namespace Availity5.Controllers
         }
 
         [HttpPut]
-        public StatusCodeResult AddRegistration(Registration registration)
+        public StatusCodeResult AddRegistration(dynamic registration)
         {
             // do somthing useful with it
             return new OkResult();

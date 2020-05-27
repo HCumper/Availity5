@@ -8,8 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/Material/input'
-import { MatSelectModule } from '@angular/Material/select'
+import { MatInputModule } from '@angular/Material/input';
+import { MatSelectModule } from '@angular/Material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -24,11 +25,12 @@ import { RegistrationComponent } from './registration/registration.component';
     MatButtonModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-   ReactiveFormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     FlexLayoutModule,
     MatInputModule,
     MatSelectModule,
+    MatTabsModule,
     HttpClientModule
   ],
   providers: [],
